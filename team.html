@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f6f8">
+  <meta name="description" content="Build a complete FPL squad of 15 with official prices, legal formations and a personalised team review.">
+  <title>Build your squad — FPL Sidekick</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+  <body class="builder-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="FPL Sidekick home">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
+      <span>FPL <b>Sidekick</b></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link is-active" href="team.html" aria-current="page">Build your squad</a>
+      <details class="nav-more"><summary>More</summary><div class="nav-menu"><a href="how-it-works.html">How it works</a><a href="about.html">About us</a></div></details>
+    </nav>
+    <details class="mobile-nav">
+      <summary><span class="mobile-nav-icon" aria-hidden="true"></span>Menu</summary>
+      <nav class="mobile-nav-panel" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a class="is-current" href="team.html" aria-current="page">Build your squad</a>
+        <a href="how-it-works.html">How it works</a>
+        <a href="about.html">About us</a>
+      </nav>
+    </details>
+    <a class="button button-small button-dark header-cta" href="#submit-team">Submit for review <span aria-hidden="true">↓</span></a>
+  </header>
+
+  <main class="wrap builder-main">
+    <section class="builder-intro">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-dot"></span> MAKE EVERY PICK COUNT</p>
+        <h1>Build your <span>starting XI.</span></h1>
+        <p>Build the full 15-player squad. Your bench adjusts with the formation to keep the official FPL position totals valid.</p>
+      </div>
+      <div class="feed-stamp"><span class="feed-pulse"></span><span>OFFICIAL FPL PLAYER DATA</span><b data-feed-date>23 SEPT 2026</b></div>
+    </section>
+
+    <section class="budget-strip" aria-label="Squad budget summary">
+      <div class="budget-main">
+        <div class="budget-copy"><span class="micro-label">SQUAD SPEND</span><strong id="budget-remaining">£100.0m <small>remaining</small></strong></div>
+        <div class="budget-track" role="progressbar" aria-label="Budget spent" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="budget-fill"></span></div>
+      </div>
+      <div class="budget-stat"><strong id="picked-count">0<span> / 15</span></strong><span>players picked</span></div>
+      <div class="budget-stat club-stat"><strong id="club-count">0<span> / 3 max</span></strong><span>largest club share</span></div>
+      <button class="button button-quiet reset-button" id="reset-team" type="button">Reset squad <span aria-hidden="true">↺</span></button>
+    </section>
+
+    <div class="builder-layout">
+      <div class="lineup-column">
+        <section class="lineup-panel" aria-labelledby="lineup-title">
+          <div class="panel-heading lineup-heading">
+            <div><p class="micro-label">YOUR SQUAD</p><h2 id="lineup-title">The starting XI</h2></div>
+            <label class="formation-control">FORMATION
+              <select id="formation-select" aria-label="Choose formation">
+                <option value="3-4-3">3–4–3</option><option value="3-5-2">3–5–2</option>
+                <option value="4-3-3">4–3–3</option><option value="4-4-2" selected>4–4–2</option>
+                <option value="4-5-1">4–5–1</option><option value="5-2-3">5–2–3</option>
+                <option value="5-3-2">5–3–2</option><option value="5-4-1">5–4–1</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="pitch" aria-label="Starting eleven pitch">
+            <div class="pitch-outline" aria-hidden="true"><span class="pitch-midline"></span><span class="pitch-center"></span><span class="pitch-box pitch-box-top"></span><span class="pitch-box pitch-box-bottom"></span></div>
+            <div class="pitch-row" data-row="GKP" aria-label="Goalkeeper"></div>
+            <div class="pitch-row" data-row="DEF" aria-label="Defenders"></div>
+            <div class="pitch-row" data-row="MID" aria-label="Midfielders"></div>
+            <div class="pitch-row" data-row="FWD" aria-label="Forwards"></div>
+          </div>
+          <div class="lineup-foot"><span id="lineup-status" role="status">Choose a slot, then add a player from the list.</span><span class="pitch-legend"><i></i> ACTIVE SLOT</span></div>
+        </section>
+
+        <section class="bench-panel" aria-labelledby="bench-title">
+          <div class="panel-heading bench-heading"><div><p class="micro-label">THE SUBSTITUTES</p><h2 id="bench-title">Your four-player bench</h2></div><span class="bench-rule-tag">FPL squad balance</span></div>
+          <div class="bench-grid" id="bench-grid" aria-label="Substitute slots"></div>
+          <p class="bench-note" id="bench-composition">Bench positions adjust with your formation so the full squad remains 2 GKP · 5 DEF · 5 MID · 3 FWD.</p>
+        </section>
+
+        <section class="insights-panel" id="squad-insights" aria-labelledby="insights-title">
+          <div class="panel-heading insights-heading">
+            <div><p class="micro-label">A QUICK READ ON YOUR PICKS</p><h2 id="insights-title">Sidekick insights</h2></div>
+            <span class="insight-source">FORM · PRICE · AVAILABILITY</span>
+          </div>
+          <div class="insights-grid" id="insights-grid" aria-live="polite"></div>
+          <p class="insight-disclaimer">Guidance uses the saved official FPL data snapshot. Estimates can change and are not guaranteed points.</p>
+        </section>
+      </div>
+
+      <aside class="player-panel" aria-labelledby="players-title">
+        <div class="panel-heading player-heading">
+          <div><p class="micro-label">THE OFFICIAL PLAYER POOL</p><h2 id="players-title">Pick a player <span id="pool-count">667</span></h2></div>
+          <span class="round-chip" id="gameweek-chip">2026/27</span>
+        </div>
+        <p class="active-slot-note" id="active-slot-note">Picking for <b>GKP</b> <span>· click a pitch slot to switch</span></p>
+        <label class="search-field"><span class="search-icon" aria-hidden="true"></span><span class="visually-hidden">Search players or clubs</span><input id="player-search" type="search" placeholder="Search player or club" autocomplete="off"><kbd>⌘ K</kbd></label>
+        <div class="player-tools">
+          <div class="position-filters" id="position-filters" aria-label="Filter players by position">
+            <button type="button" data-position="ALL">All</button><button type="button" data-position="1">GKP</button>
+            <button type="button" data-position="2">DEF</button><button type="button" data-position="3">MID</button><button type="button" data-position="4">FWD</button>
+          </div>
+          <label class="club-filter-label"><span class="visually-hidden">Filter by club</span><select id="club-filter"><option value="ALL">All clubs</option></select></label>
+        </div>
+        <div class="pool-summary"><span id="result-count">Loading players…</span><label>SORT <select id="sort-by" aria-label="Sort players"><option value="form">Form</option><option value="expected">Next GW</option><option value="points">Points</option><option value="value">Value</option><option value="price-low">Price ↑</option><option value="price-high">Price ↓</option></select></label></div>
+        <div class="player-list" id="player-list" role="list" aria-label="Available FPL players"></div>
+        <div class="player-list-foot"><span class="pool-dot"></span><span>Values are shown in £ millions</span><span id="save-state">Saved on this device</span></div>
+      </aside>
+    </div>
+
+    <section class="submission-section" id="submit-team" aria-labelledby="submit-title">
+      <div class="submission-copy"><p class="eyebrow"><span class="eyebrow-dot"></span> YOUR NEXT MOVE</p><h2 id="submit-title">Get your score and squad review.</h2><p>Submit your 15-player squad to see a score out of 100 with player-by-player feedback. Your squad and report go to my review inbox; I’ll review them and reply personally from Gmail.</p></div>
+      <form class="submission-form" id="team-submission">
+        <label class="field-label" for="submitter-email">Email for your feedback</label>
+        <input class="text-input" id="submitter-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+        <label class="consent-row"><input type="checkbox" name="email-consent" required><span>I agree to share my squad and email with FPL Sidekick via Formspree for this review and its follow-up.</span></label>
+        <button class="button button-dark" type="submit">Get my score &amp; feedback <span aria-hidden="true">↗</span></button>
+        <p class="local-mode-note">Your score appears here immediately. Formspree sends your squad and report to the review inbox. I’ll email your personal feedback from Gmail; this site never opens your email app.</p>
+        <p class="submission-status" id="submission-status" role="status" aria-live="polite" hidden></p>
+      </form>
+    </section>
+
+    <section class="analysis-report" id="analysis-report" hidden aria-labelledby="report-title" aria-live="polite">
+      <div id="report-content"></div>
+    </section>
+
+    <footer class="builder-footer"><span>FPL Sidekick <span class="footer-dot">·</span> Independent fan-made tool <span class="footer-dot">·</span><a href="about.html">About us</a></span><span>Player data: <a href="https://fantasy.premierleague.com/" target="_blank" rel="noreferrer">official FPL feed ↗</a><span class="footer-dot">·</span><a href="how-it-works.html">How analysis works</a></span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="players.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
